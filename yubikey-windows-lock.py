@@ -12,7 +12,22 @@ class YubikeyWindowsLock:
     def __init__(self, serial = None, wait_time = 2) -> None:
         _, self._state = scan_devices()
         self._keys = []
+        self._set_serial(serial)
+        self._set_wait_time(wait_time)
+
+    def _serial_sanity_check(self, serial) -> None:
+        if not serial:
+            return
+        if not str(serial).isdecimal():
+            raise ValueError(f"serial number contains illegal character")
+        if len(str(serial)) != 8:
+            raise ValueError(f"serial number must consist of 8 digits")
+
+    def _set_serial(self, serial) -> None:
+        self._serial_sanity_check(serial)
         self._serial = serial
+
+    def _set_wait_time(self, wait_time) -> None:
         if wait_time < 1:
             raise ValueError(f"Value {wait_time} not allowed for wait_time, needs to be at least 1")
         self._wait_time = wait_time
@@ -40,11 +55,9 @@ class YubikeyWindowsLock:
 
     def monitor_system(self, wait_time=None, serial=None) -> None:
         if wait_time:
-            if wait_time < 1:
-                raise ValueError(f"Value {wait_time} not allowed for wait_time, needs to be at least 1")
-            self._wait_time = wait_time
+            self._set_wait_time(wait_time)
         if serial:
-            self._serial = serial
+            self._set_serial(serial)
         while True:
             if self._state_changed():
                 self._update_list_of_yubikeys()
@@ -55,6 +68,6 @@ class YubikeyWindowsLock:
 if __name__ == '__main__':
     parser = ArgumentParser(description='Lock Windows when Yubikey is removed')
     parser.add_argument('serial', type=int, nargs='?', default=None, help='Limit to yubikey with this serial number')
-    parser.add_argument('-w', '--wait', type=float, nargs='?', default=5, help='The time (in s) between two checks (default: 5)')
+    parser.add_argument('-w', '--wait', type=float, default=5, help='The time (in s) between two checks (default: 5)')
     args = parser.parse_args()
     YubikeyWindowsLock().monitor_system(wait_time=args.wait, serial=args.serial)
