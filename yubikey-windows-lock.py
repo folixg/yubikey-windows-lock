@@ -67,7 +67,7 @@ class YubikeyWindowsLock:
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Lock Windows when Yubikey is removed')
-    parser.add_argument('serial', type=int, nargs='?', default=None, help='Limit to yubikey with this serial number')
+    parser.add_argument('-s', '--serial', type=int, default=None, help='Limit to yubikey with this serial number')
     parser.add_argument('-w', '--wait', type=float, default=5, help='The time (in s) between two checks (default: 5)')
     args = parser.parse_args()
     YubikeyWindowsLock().monitor_system(wait_time=args.wait, serial=args.serial)

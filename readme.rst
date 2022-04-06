@@ -21,18 +21,17 @@ Command Line Options
 
 .. code-block::
 
-    usage: yubikey-windows-lock.py [-h] [-w WAIT] [serial]
+    usage: yubikey-windows-lock.py [-h] [-s SERIAL] [-w WAIT]
 
     Lock Windows when Yubikey is removed
 
-    positional arguments:
-    serial                Limit to yubikey with this serial number
-
     options:
     -h, --help            show this help message and exit
+    -s SERIAL, --serial SERIAL
+                            Limit to yubikey with this serial number
     -w WAIT, --wait WAIT  The time (in s) between two checks (default: 5)
 
-Start at Windows login
+Start At Windows Login
 ----------------------
 An easy way to automatically launch the script on Windows login is to use Windows Task Scheduler.
 Create a basic task that is executed on logon and as action starts a program.
@@ -49,4 +48,4 @@ So it should look something like
 
 .. code-block::
 
-    C:\Users\<your_username>\<path_to_this_repo>\yubikey-windows-lock.py -w 3 12345678
+    C:\Users\<your_username>\<path_to_this_repo>\yubikey-windows-lock.py -w 3 -s <your_yubikey_serial>
