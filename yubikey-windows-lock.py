@@ -3,13 +3,14 @@ from ctypes import windll
 from ykman.device import list_all_devices, scan_devices
 from time import sleep
 
+
 class YubikeyWindowsLock:
     _state = None
     _keys = []
     _serial = None
     _wait_time = 2
 
-    def __init__(self, serial = None, wait_time = 2) -> None:
+    def __init__(self, serial=None, wait_time=2) -> None:
         _, self._state = scan_devices()
         self._keys = []
         self._set_serial(serial)
@@ -29,7 +30,9 @@ class YubikeyWindowsLock:
 
     def _set_wait_time(self, wait_time) -> None:
         if wait_time < 1:
-            raise ValueError(f"Value {wait_time} not allowed for wait_time, needs to be at least 1")
+            raise ValueError(
+                f"Value {wait_time} not allowed for wait_time, needs to be at least 1"
+            )
         self._wait_time = wait_time
 
     def _state_changed(self) -> bool:
@@ -65,9 +68,22 @@ class YubikeyWindowsLock:
                     self._lock_screen()
             self._wait()
 
-if __name__ == '__main__':
-    parser = ArgumentParser(description='Lock Windows when Yubikey is removed')
-    parser.add_argument('-s', '--serial', type=int, default=None, help='Limit to yubikey with this serial number')
-    parser.add_argument('-w', '--wait', type=float, default=5, help='The time (in s) between two checks (default: 5)')
+
+if __name__ == "__main__":
+    parser = ArgumentParser(description="Lock Windows when Yubikey is removed")
+    parser.add_argument(
+        "-s",
+        "--serial",
+        type=int,
+        default=None,
+        help="Limit to yubikey with this serial number",
+    )
+    parser.add_argument(
+        "-w",
+        "--wait",
+        type=float,
+        default=5,
+        help="The time (in s) between two checks (default: 5)",
+    )
     args = parser.parse_args()
     YubikeyWindowsLock().monitor_system(wait_time=args.wait, serial=args.serial)
