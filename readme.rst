@@ -29,7 +29,7 @@ Command Line Options
     -h, --help            show this help message and exit
     -s SERIAL, --serial SERIAL
                             Limit to yubikey with this serial number
-    -w WAIT, --wait WAIT  The time (in s) between two checks (default: 5)
+    -w WAIT, --wait WAIT  The time (in s) between two checks (default: 2)
 
 Start At Windows Login
 ----------------------
