@@ -1,7 +1,7 @@
 """ Yubikey Windows Lock
 Script to automatically lock your windows machine when yubikey gets removed
 
-usage: yubikey-windows-lock.py [-h] [-s SERIAL] [-w WAIT]
+usage: yubikey_windows_lock.py [-h] [-s SERIAL] [-w WAIT]
 
 options:
   -h, --help            show this help message and exit

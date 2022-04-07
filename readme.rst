@@ -21,7 +21,7 @@ Command Line Options
 
 .. code-block::
 
-    usage: yubikey-windows-lock.py [-h] [-s SERIAL] [-w WAIT]
+    usage: yubikey_windows_lock.py [-h] [-s SERIAL] [-w WAIT]
 
     Lock Windows when Yubikey is removed
 
@@ -42,10 +42,10 @@ Typically that is
 
     C:\Users\<your_username>\AppData\Local\Programs\Python\<your_python_version>\pythonw.exe
 
-In the ``Add arguments`` field you provide the path to ``yubikey-windows-lock.py`` and optionally the
+In the ``Add arguments`` field you provide the path to ``yubikey_windows_lock.py`` and optionally the
 arguments you want to provide to the script.
 So it should look something like
 
 .. code-block::
 
-    C:\Users\<your_username>\<path_to_this_repo>\yubikey-windows-lock.py -w 3 -s <your_yubikey_serial>
+    C:\Users\<your_username>\<path_to_this_repo>\yubikey_windows_lock.py -w 3 -s <your_yubikey_serial>
